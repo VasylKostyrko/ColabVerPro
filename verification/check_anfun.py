@@ -9,10 +9,10 @@
 повинні мати однаковий відступ."""
 
 from verification.common import findoptype, peek, opname, test_type
-from z3py.typefun import conv_var_types_to_dict
+from typefun import conv_var_types_to_dict
 
 
-def check_anfun(programfile, dictcppos, dictcpcond, progstru, dicttermexpr, dict_var_types_cp):
+def ch_anfun(programfile, dictcppos, dictcpcond, progstru, dicttermexpr, dict_var_types_cp):
     """Зчиитує програму з файлу programfile.
     Перевіряє, чи правильна структура модуля programfile.
     Перевіряє, чи має вона правильно розставлені контрольні точки.
