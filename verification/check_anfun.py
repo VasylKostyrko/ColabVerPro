@@ -12,7 +12,7 @@ from verification.common import findoptype, peek, opname, test_type
 from z3py.typefun import conv_var_types_to_dict
 
 
-def check_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr, dict_var_types_cp):
+def check_anfun(programfile, dictcppos, dictcpcond, progstru, dicttermexpr, dict_var_types_cp):
     """Зчиитує програму з файлу programfile.
     Перевіряє, чи правильна структура модуля programfile.
     Перевіряє, чи має вона правильно розставлені контрольні точки.
@@ -26,8 +26,8 @@ def check_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr,
     (I число буде більше від II).
     Повертає також словник dict_var_types_cp з типами змінних в контрольних точках
     (серед них ключ AREA визначає тип змінних за замовчуванням)."""
-    messLang = win.messLang
-    messlist = []
+    # messLang = win.messLang
+    # messlist = []
     standoff = 4
     stackop = []
     nop = 0         # номер оператора в програмі
@@ -50,9 +50,10 @@ def check_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr,
                 if not test:
                     # Помилка: Неправильний рівень оператора
                     nerr += 1
-                    message = messLang["errStack"]
-                    messlist.append(message)
-                    res = [nerr, messlist]
+                    # message = messLang["errStack"]
+                    # messlist.append(message)
+                    # res = [nerr, messlist]
+                    res = [nerr]    
                     return res
 
                 if multyline_comment:
@@ -87,8 +88,8 @@ def check_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr,
                     if not test_type(area_type):
                         # непередбачений тип даних
                         nerr += 1
-                        message = messLang["errType"] + " " + netop + "!"
-                        messlist.append(message)
+                        # message = messLang["errType"] + " " + netop + "!"
+                        # messlist.append(message)
                 elif optype == 0:
                     # Опис контрольної точки
                     netop = str.strip(netop[1:])
@@ -97,8 +98,8 @@ def check_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr,
                         # Помилка: немає двокрапки
                         nerr += 1
                         netop += 1
-                        message = messLang["errEmpCP1"] + netop + messLang["errEmpCP3"]
-                        messlist.append(message)
+                        # message = messLang["errEmpCP1"] + netop + messLang["errEmpCP3"]
+                        # messlist.append(message)
                         cp = netop
                     else:
                         # Виділяємо ім'я контрольної точки
@@ -109,26 +110,26 @@ def check_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr,
                         cond = []
                     if dictcppos.get(cp, -1) > 0:
                         nerr += 1
-                        message = messLang["errRepCP1"] + cp + messLang["errRepCP2"]
-                        messlist.append(message)
+                        # message = messLang["errRepCP1"] + cp + messLang["errRepCP2"]
+                        # messlist.append(message)
                     if cp == "I":
                         if len(dictcppos) > 0:
                             nerr += 1
-                            message = messLang["errInCPnf"]
-                            messlist.append(message)
+                            # message = messLang["errInCPnf"]
+                            # messlist.append(message)
                         if not itisfunction:
                             if offset > 0:
                                 nerr += 1
-                                message = messLang["errInCPb"]
-                                messlist.append(message)
+                                # message = messLang["errInCPb"]
+                                # messlist.append(message)
                         dictcppos[cp] = [numop + 1]
                     elif cp == "E":
                         if itisfunction:
                             pass
                         elif offset > 0:
                             nerr += 1
-                            message = messLang["errEndCPe"]
-                            messlist.append(message)
+                            # message = messLang["errEndCPe"]
+                            # messlist.append(message)
                         dictcppos[cp] = [numop + 1]
                     else:
                         # Контрольна точка циклу
@@ -141,18 +142,18 @@ def check_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr,
                                 strop.append(cp)
                             else:
                                 nerr += 1
-                                message = messLang["errLoop1"] + str(nloop) + messLang["errLoop2"] + strop[3] + ")!"
-                                messlist.append(message)
+                                # message = messLang["errLoop1"] + str(nloop) + messLang["errLoop2"] + strop[3] + ")!"
+                                # messlist.append(message)
                             stackop.append(strop)
                             dictcppos[cp] = [numop + 1, nloop]
                         elif typop > 0:
                             nerr += 1
-                            message = messLang["errIfCP1"] + netop + messLang["errIfCP2"] + opname(typop) + ")!"
-                            messlist.append(message)
+                            # message = messLang["errIfCP1"] + netop + messLang["errIfCP2"] + opname(typop) + ")!"
+                            # messlist.append(message)
                         else:
                             nerr += 1
-                            message = messLang["errAnnStr"]
-                            messlist.append(message)
+                            # message = messLang["errAnnStr"]
+                            # messlist.append(message)
                 elif optype == 1:
                     # коментар або область опису контрольної точки
                     if defcp:
@@ -178,8 +179,8 @@ def check_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr,
                                     for curtype in types_set:
                                         if not test_type(curtype):
                                             nerr += 1
-                                            message = messLang["errType"] + " " + curtype + "!"
-                                            messlist.append(message)
+                                            # message = messLang["errType"] + " " + curtype + "!"
+                                            # messlist.append(message)
                                 else:
                                     # відношення
                                     rel = linecp
@@ -194,21 +195,21 @@ def check_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr,
                     # Оператор while
                     if dictcppos.get("I", -1) == -1:
                         nerr += 1
-                        message = messLang["errLoopCP1"] + str(nop) + messLang["errLoopCP2"]
-                        messlist.append(message)
+                        # message = messLang["errLoopCP1"] + str(nop) + messLang["errLoopCP2"]
+                        # messlist.append(message)
                 elif optype == 8:
                     # Заголовок функції
                     itisfunction = True
                     if len(dictcppos) > 0:
                         nerr += 1
-                        message = messLang["errFunCP"]
-                        messlist.append(message)
+                        # message = messLang["errFunCP"]
+                        # messlist.append(message)
                 elif optype == 9:
                     # Оператор return
                     if dictcppos.get("E", -1) == -1:
                         nerr += 1
-                        message = messLang["errRetCP"]
-                        messlist.append(message)
+                        # message = messLang["errRetCP"]
+                        # messlist.append(message)
                 level = len(stackop) - 1
 
                 # Структура програми
@@ -223,33 +224,34 @@ def check_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr,
             nop += 1
         if nop == 0:
             nerr += 1
-            message = messLang["errPrEmp"]
-            messlist.append(message)
+            # message = messLang["errPrEmp"]
+            # messlist.append(message)
         if len(stackop) > 1:
             nerr += 1
-            message = messLang["errPrStr"]
-            messlist.append(message)
+            # message = messLang["errPrStr"]
+            # messlist.append(message)
         if offset > 0:
             nerr += 1
-            message = messLang["errPrStr"]
-            messlist.append(message)
+            # message = messLang["errPrStr"]
+            # messlist.append(message)
         if level > 0:
             nerr += 1
-            message = messLang["errPrStr"]
-            messlist.append(message)
+            # message = messLang["errPrStr"]
+            # messlist.append(message)
         if len(dictcppos) == 0:
             nerr += 1
-            message = messLang["errNoCP"]
-            messlist.append(message)
+            # message = messLang["errNoCP"]
+            # messlist.append(message)
         elif dictcppos.get("I", -1) == -1:
             nerr += 1
-            message = messLang["errInitCP"]
-            messlist.append(message)
+            # message = messLang["errInitCP"]
+            # messlist.append(message)
         elif dictcppos.get("E", -1) == -1:
             nerr += 1
-            message = messLang["errEndCP"]
-            messlist.append(message)
-        res = [nerr, messlist]
+            # message = messLang["errEndCP"]
+            # messlist.append(message)
+        # res = [nerr, messlist]
+        res = [nerr]
         return res
 
 
