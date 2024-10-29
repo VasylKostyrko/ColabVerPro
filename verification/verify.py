@@ -222,6 +222,10 @@ class MainWindow(QMainWindow):
                 corran = False
                 break
         self.corran = corran
+        if len(cpdictconds) == 0:
+            errNoCPCond = messLang["noCPCond"]
+            viewErrMsg(self, errNoCPCond)
+            return 1        
         cpdictctrees = formcpdictctrees(cpdictconds)
         dicttermtrees = formdict_termtrees(dicttermexpr)
 
