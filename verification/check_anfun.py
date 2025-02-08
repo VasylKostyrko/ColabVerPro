@@ -12,7 +12,7 @@ from verification.common import findoptype, peek, opname, test_type
 from z3py.typefun import conv_var_types_to_dict
 
 
-def ch_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr, dict_var_types_cp):
+def ch_anfun(programfile, dictcppos, dictcpcond, progstru, dicttermexpr, dict_var_types_cp):
     """Зчиитує програму з файлу programfile.
     Перевіряє, чи правильна структура модуля programfile.
     Перевіряє, чи має вона правильно розставлені контрольні точки.
@@ -26,7 +26,7 @@ def ch_anfun(win, programfile, dictcppos, dictcpcond, progstru, dicttermexpr, di
     (I число буде більше від II).
     Повертає також словник dict_var_types_cp з типами змінних в контрольних точках
     (серед них ключ AREA визначає тип змінних за замовчуванням)."""
-    messLang = win.messLang
+    # messLang = win.messLang
     messlist = []
     standoff = 4
     stackop = []
