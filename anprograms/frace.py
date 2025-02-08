@@ -1,5 +1,7 @@
 # AREA(Int)
 # CP(I):
+#   x >= 0
+#   y > 0
 # ECP
 r = x
 q = 0
@@ -9,4 +11,6 @@ while y <= r:
     r -= y
     q += 1
 # CP(E):
+#   x == q * y + r
+#   r < y
 # ECP
