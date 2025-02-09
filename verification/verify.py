@@ -204,7 +204,7 @@ class MainWindow(QMainWindow):
             return 1
 
         anprog = showanprog(table, filename, self)
-        self.anprog = anprog
+        # self.anprog = anprog
 
         dictcppos = {}
         cpdictconds = {}
@@ -224,7 +224,7 @@ class MainWindow(QMainWindow):
             if cpdictconds.get(cp, -1) == -1:
                 corran = False
                 break
-        self.corran = corran
+        # self.corran = corran
         if len(cpdictconds) == 0:
             errNoCPCond = messLang["noCPCond"]
             viewErrMsg(self, table, errNoCPCond)
@@ -259,7 +259,7 @@ class MainWindow(QMainWindow):
                 errNoType = messLang["errNoType"] + cp + ": " + varstr + " !"
                 viewErrMsg(self, table, errNoType)
             # Помилка: Нетипізовані змінні в КТ...
-            print("3:")
+            # print("3:")
 
             return 3
 
@@ -297,7 +297,7 @@ class MainWindow(QMainWindow):
         if res[0] != 0:
             # Програма має помилкову структуру
             print(res[0], res[1])
-            print("4:")
+            # print("4:")
             
             return 4
         else:
@@ -305,25 +305,25 @@ class MainWindow(QMainWindow):
             return 0
 
     def buildtracks(self):
-        """Побудувати траси (контрольні шляхи в програмі)."""
-        progstru = self.progstru
-        dictcppos = self.dictcppos
+        # """Побудувати траси (контрольні шляхи в програмі)."""
+        # progstru = self.progstru
+        # dictcppos = self.dictcppos
         genstrprog(progstru)
         tracks = gentracks(progstru, dictcppos)
-        self.progstru = progstru
-        self.tracks = tracks
-        self.btnCT.setEnabled(True)
-        self.btnParams.setEnabled(True)
+        # self.progstru = progstru
+        # self.tracks = tracks
+        # self.btnCT.setEnabled(True)
+        # self.btnParams.setEnabled(True)
 
     def buildparams(self):
         """Побудувати параметри для ініціалізації змінних трас."""
-        tracks = self.tracks
+        # tracks = self.tracks
         initvars = forminit(tracks)
         initvartrees = forminitvartrees(initvars)
-        corran = self.corran
-        self.initvartrees = initvartrees
-        self.btnCond.setEnabled(corran)
-        self.btnIV.setEnabled(True)
+        # corran = self.corran
+        # self.initvartrees = initvartrees
+        # self.btnCond.setEnabled(corran)
+        # self.btnIV.setEnabled(True)
 
     def buildconds(self):
         """Побудувати умови коректності та завершимості трас."""
@@ -332,22 +332,22 @@ class MainWindow(QMainWindow):
         cpdictctrees = self.cpdictctrees
         symvartrees = copyvartrees(initvartrees)
         vcimps = formcondcorr(tracks, symvartrees, cpdictctrees)     # Побудова умов коректності трас у вигляді дерев
-        self.vcimps = vcimps
-        self.btnCC.setEnabled(True)
-        self.btnRes.setEnabled(True)
-        params = self.options
-        eqtrans = params["eqtrans"]  # Чи спрощувати умови коректності засобами VerPro? (True - спрощувати)
-        if eqtrans == 1:
-            self.btnSimpl.setEnabled(True)
-        usez3py = params["usez3py"]  # Чи спрощувати умови коректності засобами Z3py? (True - спрощувати)
-        if usez3py == 1:
-            self.btnZ3.setEnabled(True)
-        dicttermtrees = self.dicttermtrees
-        if self.terman and len(dicttermtrees) > 0:
-            tracktconds = formtermcond(tracks, vcimps, initvartrees, symvartrees, cpdictctrees, dicttermtrees)
-            # Побудова умов завершення трас
-            self.tracktconds = tracktconds
-            self.btnTC.setEnabled(True)
+        # self.vcimps = vcimps
+        # self.btnCC.setEnabled(True)
+        # self.btnRes.setEnabled(True)
+        # params = self.options
+        # eqtrans = params["eqtrans"]  # Чи спрощувати умови коректності засобами VerPro? (True - спрощувати)
+        # if eqtrans == 1:
+            # self.btnSimpl.setEnabled(True)
+        # usez3py = params["usez3py"]  # Чи спрощувати умови коректності засобами Z3py? (True - спрощувати)
+        # if usez3py == 1:
+            # self.btnZ3.setEnabled(True)
+        # dicttermtrees = self.dicttermtrees
+        # if self.terman and len(dicttermtrees) > 0:
+            # tracktconds = formtermcond(tracks, vcimps, initvartrees, symvartrees, cpdictctrees, dicttermtrees)
+            # # Побудова умов завершення трас
+            # self.tracktconds = tracktconds
+            # self.btnTC.setEnabled(True)
 
     def simplifyvcs(self):
         """Спростити умови коректності трас
