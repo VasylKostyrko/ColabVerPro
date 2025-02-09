@@ -226,6 +226,9 @@ def ch_anfun(programfile, dictcppos, dictcpcond, progstru, dicttermexpr, dict_va
                 progstru.append(opstru)
                 numop += 1
             nop += 1
+            
+        print("dictcppos = ", dictcppos)
+        
         if nop == 0:
             # Помилка: анотована програма пуста!
             nerr += 1
