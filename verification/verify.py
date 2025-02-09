@@ -199,7 +199,7 @@ class MainWindow(QMainWindow):
             errNoPrF = messLang["errNoPrF"]
             viewErrMsg(self, errNoPrF)
             # Помилка: умови в контрольних точках відсутні!
-            print("1:")
+            #print("1:")
             
             return 1
 
@@ -213,10 +213,10 @@ class MainWindow(QMainWindow):
         dict_var_types_cp = {}
         res = check_anfun(self, filename, dictcppos, cpdictconds, progstru, dicttermexpr, dict_var_types_cp)
         terman = istermcompl(dicttermexpr)
-        self.terman = terman
-        self.dictcppos = dictcppos
-        self.progstru = progstru
-        self.terman = istermcompl(dicttermexpr)
+        # self.terman = terman
+        # self.dictcppos = dictcppos
+        # self.progstru = progstru
+        # self.terman = istermcompl(dicttermexpr)
 
         # Перевіряємо комплектність
         corran = True
@@ -229,7 +229,7 @@ class MainWindow(QMainWindow):
             errNoCPCond = messLang["noCPCond"]
             viewErrMsg(self, table, errNoCPCond)
             # Програма взагалі не має контрольних точок
-            print("2:")
+            # print("2:")
 
             return 2            
             

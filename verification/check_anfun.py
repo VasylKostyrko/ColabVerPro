@@ -186,8 +186,8 @@ def ch_anfun(programfile, dictcppos, dictcpcond, progstru, dicttermexpr, dict_va
                                     # відношення
                                     rel = linecp
                                     cond.append(rel)
-                    opstru = {"top": 13, "op": netop, "offset": offset, "level": level}
-                    progstru.append(opstru)
+                    # opstru = {"top": 13, "op": netop, "offset": offset, "level": level}
+                    # progstru.append(opstru)
                     numop += 1
                     continue
 
@@ -227,8 +227,6 @@ def ch_anfun(programfile, dictcppos, dictcpcond, progstru, dicttermexpr, dict_va
                 numop += 1
             nop += 1
             
-        print("dictcpcond = ", dictcpcond)
-        
         if nop == 0:
             # Помилка: анотована програма пуста!
             nerr += 1
