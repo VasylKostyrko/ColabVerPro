@@ -144,7 +144,7 @@ def substvartree(tree, vdict):
         return newtree
 
 
-def formcondcorr(tracks, symvar, cpdictctrees):
+def formcond_corr(tracks, symvar, cpdictctrees):
     """На базі списку трас tracks будує список vconds умов їх коректності
     у вигляді списку об'єктів класу Implication.
     Функція використовує список initvar початкових значень змінних трас
