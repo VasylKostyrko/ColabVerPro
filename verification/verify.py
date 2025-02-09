@@ -198,6 +198,9 @@ class MainWindow(QMainWindow):
         if not os.path.isfile(filename):
             errNoPrF = messLang["errNoPrF"]
             viewErrMsg(self, errNoPrF)
+            # Помилка: умови в контрольних точках відсутні!
+            print("1:")
+            
             return 1
 
         anprog = showanprog(table, filename, self)
@@ -224,8 +227,12 @@ class MainWindow(QMainWindow):
         self.corran = corran
         if len(cpdictconds) == 0:
             errNoCPCond = messLang["noCPCond"]
-            viewErrMsg(self, errNoCPCond)
-            return 1        
+            viewErrMsg(self, table, errNoCPCond)
+            # Програма взагалі не має контрольних точок
+            print("2:")
+
+            return 2            
+            
         cpdictctrees = formcpdictctrees(cpdictconds)
         dicttermtrees = formdict_termtrees(dicttermexpr)
 
@@ -250,8 +257,12 @@ class MainWindow(QMainWindow):
                     varstr += var
 
                 errNoType = messLang["errNoType"] + cp + ": " + varstr + " !"
-                viewErrMsg(self, errNoType)
-            return 1
+                viewErrMsg(self, table, errNoType)
+            # Помилка: Нетипізовані змінні в КТ...
+            print("3:")
+
+            return 3
+
 
         dict_type_vars_cp = compact_types(dict_var_types_cp)
 
@@ -282,7 +293,14 @@ class MainWindow(QMainWindow):
         self.btnTE.setEnabled(len(dicttermtrees) > 0)
         # self.btnCond.setEnabled(res[0] == 0 and corran)
         if res[0] != 0:
-            return 1
+            # Програма має помилкову структуру
+            print(res[0], res[1])
+            print("4:")
+            
+            return 4
+        else:
+            # Правильна анотація програми
+            return 0
 
     def buildtracks(self):
         """Побудувати траси (контрольні шляхи в програмі)."""
