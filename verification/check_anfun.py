@@ -186,8 +186,8 @@ def ch_anfun(programfile, dictcppos, dictcpcond, progstru, dicttermexpr, dict_va
                                     # відношення
                                     rel = linecp
                                     cond.append(rel)
-                    # opstru = {"top": 13, "op": netop, "offset": offset, "level": level}
-                    # progstru.append(opstru)
+                    opstru = {"top": 13, "op": netop, "offset": offset, "level": level}
+                    progstru.append(opstru)
                     numop += 1
                     continue
 
