@@ -277,6 +277,8 @@ class MainWindow(QMainWindow):
                 res[0] += 1
                 errCPCond = messLang["errCPCond"] + cp + "!"
                 res[1].append(errCPCond)
+                
+        print("4a: res[0]=", res[0], "res[1]=", res[1])
 
         numrows = table.rowCount() + 1
         table.setRowCount(numrows)
