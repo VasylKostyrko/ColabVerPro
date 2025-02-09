@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QTableWidgetItem
-from PyQt5.QtGui import QColor, QBrush
+# from PyQt5.QtWidgets import QTableWidgetItem
+# from PyQt5.QtGui import QColor, QBrush
 from exprlib.logilib.implication import impexpr, Implication
 from exprlib.treelib.tree import treeexpr
 from verification.language import nounagree, plural
