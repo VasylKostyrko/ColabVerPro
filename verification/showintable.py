@@ -2,10 +2,10 @@
 # from PyQt5.QtGui import QColor, QBrush
 from exprlib.logilib.implication import impexpr, Implication
 from exprlib.treelib.tree import treeexpr
-from verification.language import nounagree, plural
+from language import nounagree, plural
 import os.path
 import json
-from z3py.typefun import param_types_str
+from typefun import param_types_str
 
 
 def showanprog(win, table, filename):
