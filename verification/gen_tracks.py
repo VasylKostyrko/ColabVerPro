@@ -59,12 +59,9 @@ def generate(progstr, dictcp, cp):
 
     while not fin:
         while True:
-            print("i=", i)
-            
+            # print("i=", i)
             el = progstr[i]
-            
-            print("el=", el)
-            
+            # print("el=", el)
             if el["top"] == 13:
                 # Продовження опису контрольної точки
                 i += 1
